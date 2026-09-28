@@ -9,6 +9,13 @@ export default function MisPedidos() {
   const [params] = useSearchParams();
   const nuevo = params.get("nuevo");
 
+  const ESTADOS = {
+    Pendiente: "Pendiente",
+    "En tránsito": "En tránsito",
+    "En tr??nsito": "En tránsito", // por si viene mal de la BD
+    Entregado: "Entregado",
+  };
+
   useEffect(() => {
     // Demo: hardcodeamos cliente 1
     api
@@ -32,7 +39,7 @@ export default function MisPedidos() {
               <strong>Pedido #{p.id_pedido}</strong>
               <span>{new Date(p.fecha).toLocaleDateString("es-AR")}</span>
               <span className={`estado ${p.estado.toLowerCase()}`}>
-                {p.estado}
+                {ESTADOS[p.estado] || p.estado}
               </span>
             </header>
             <ul>
