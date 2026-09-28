@@ -41,21 +41,21 @@
 
 The database follows a **normalized design (3NF)** with **13 tables** and **15+ relationships**:
 
-| Table          | Description                        |
-| -------------- | ---------------------------------- |
-| categoria      | Product categories                 |
-| subcategoria   | Subcategories per category         |
-| marca          | Product brands                     |
-| proveedor      | Suppliers                          |
-| producto       | Products (main table, 50+ records) |
-| cliente        | Customers                          |
-| sucursal       | Physical stores                    |
-| stock          | Stock per product per store        |
-| envio          | Shipping information               |
-| pedido         | Orders                             |
-| linea_pedido   | Order line items                   |
-| pago           | Payments                           |
-| resena         | Product reviews                    |
+| Table        | Description                        |
+| ------------ | ---------------------------------- |
+| categoria    | Product categories                 |
+| subcategoria | Subcategories per category         |
+| marca        | Product brands                     |
+| proveedor    | Suppliers                          |
+| producto     | Products (main table, 50+ records) |
+| cliente      | Customers                          |
+| sucursal     | Physical stores                    |
+| stock        | Stock per product per store        |
+| envio        | Shipping information               |
+| pedido       | Orders                             |
+| linea_pedido | Order line items                   |
+| pago         | Payments                           |
+| resena       | Product reviews                    |
 
 ---
 
@@ -108,56 +108,56 @@ Create a .env file in frontend/:
 
 ### Products
 
-| Method | Endpoint                       | Description                             |
-| ------ | ------------------------------ | --------------------------------------- |
-| GET    | /api/productos                 | List products                           |
-| GET    | /api/productos/:id             | Get product detail with reviews         |
-| GET    | /api/productos/:id/resenas     | Get reviews for a product               |
-| GET    | /api/productos/:id/stock       | Get stock per store for a product       |
+| Method | Endpoint                   | Description                       |
+| ------ | -------------------------- | --------------------------------- |
+| GET    | /api/productos             | List products                     |
+| GET    | /api/productos/:id         | Get product detail with reviews   |
+| GET    | /api/productos/:id/resenas | Get reviews for a product         |
+| GET    | /api/productos/:id/stock   | Get stock per store for a product |
 
 ### Categories
 
-| Method | Endpoint                            | Description                      |
-| ------ | ----------------------------------- | -------------------------------- |
-| GET    | /api/categorias                     | List all categories              |
-| GET    | /api/categorias/:id/subcategorias   | List subcategories of a category |
+| Method | Endpoint                          | Description                      |
+| ------ | --------------------------------- | -------------------------------- |
+| GET    | /api/categorias                   | List all categories              |
+| GET    | /api/categorias/:id/subcategorias | List subcategories of a category |
 
 ### Customers
 
-| Method | Endpoint                    | Description                   |
-| ------ | --------------------------- | ----------------------------- |
-| GET    | /api/clientes               | List all customers            |
-| GET    | /api/clientes/:id           | Get customer detail           |
-| GET    | /api/clientes/:id/pedidos   | Get all orders for a customer |
+| Method | Endpoint                  | Description                   |
+| ------ | ------------------------- | ----------------------------- |
+| GET    | /api/clientes             | List all customers            |
+| GET    | /api/clientes/:id         | Get customer detail           |
+| GET    | /api/clientes/:id/pedidos | Get all orders for a customer |
 
 ### Orders
 
-| Method | Endpoint                  | Description                                               |
-| ------ | ------------------------- | --------------------------------------------------------- |
-| GET    | /api/pedidos              | List all orders                                           |
-| GET    | /api/pedidos/:id          | Get order detail                                          |
-| POST   | /api/pedidos              | Create a new order                                        |
-| PATCH  | /api/pedidos/:id/estado   | Update order status                                       |
+| Method | Endpoint                | Description         |
+| ------ | ----------------------- | ------------------- |
+| GET    | /api/pedidos            | List all orders     |
+| GET    | /api/pedidos/:id        | Get order detail    |
+| POST   | /api/pedidos            | Create a new order  |
+| PATCH  | /api/pedidos/:id/estado | Update order status |
 
 ### Payments
 
-| Method | Endpoint         | Description        |
-| ------ | ---------------- | ------------------ |
-| GET    | /api/pagos       | List all payments  |
-| GET    | /api/pagos/:id   | Get payment detail |
+| Method | Endpoint       | Description        |
+| ------ | -------------- | ------------------ |
+| GET    | /api/pagos     | List all payments  |
+| GET    | /api/pagos/:id | Get payment detail |
 
 ### Reviews
 
-| Method | Endpoint       | Description           |
-| ------ | -------------- | --------------------- |
-| GET    | /api/resenas   | List reviews          |
-| POST   | /api/resenas   | Create a new review   |
+| Method | Endpoint     | Description         |
+| ------ | ------------ | ------------------- |
+| GET    | /api/resenas | List reviews        |
+| POST   | /api/resenas | Create a new review |
 
 ### Health
 
-| Method | Endpoint      | Description          |
-| ------ | ------------- | -------------------- |
-| GET    | /api/health   | Service health check |
+| Method | Endpoint    | Description          |
+| ------ | ----------- | -------------------- |
+| GET    | /api/health | Service health check |
 
 ---
 
@@ -199,5 +199,5 @@ MIT (c) Magali Ofelia Gafe
 
 **Magali Ofelia Gafe**
 
-- GitHub: [@maga-484](https://github.com/maga-484)
-- LinkedIn: [magali-gafe](https://linkedin.com/in/magali-gafe-713224ab)
+- GitHub: [@maga-484] (https://github.com/maga-484)
+- LinkedIn: [magali-gafe] (https://www.linkedin.com/in/magal%C3%AD-gafe-713224ab/)
