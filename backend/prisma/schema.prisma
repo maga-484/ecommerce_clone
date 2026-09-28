@@ -1,0 +1,169 @@
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "mysql"
+	url      = env("DATABASE_URL")
+}
+
+model Categoria {
+	id_categoria Int            @id @default(autoincrement())
+	nombre       String         @db.VarChar(100)
+	descripcion  String?        @db.VarChar(255)
+	subcategorias Subcategoria[]
+
+	@@map("categoria")
+}
+
+model Subcategoria {
+	id_subcategoria Int       @id @default(autoincrement())
+	nombre          String    @db.VarChar(100)
+	id_categoria    Int
+	categoria       Categoria @relation(fields: [id_categoria], references: [id_categoria])
+	productos       Producto[]
+
+	@@map("subcategoria")
+}
+
+model Marca {
+	id_marca    Int        @id @default(autoincrement())
+	nombre      String     @db.VarChar(100)
+	pais_origen String?    @db.VarChar(50)
+	productos   Producto[]
+
+	@@map("marca")
+}
+
+model Proveedor {
+	id_proveedor Int        @id @default(autoincrement())
+	nombre       String     @db.VarChar(150)
+	cuit         String?    @unique @db.VarChar(15)
+	telefono     String?    @db.VarChar(20)
+	email        String?    @db.VarChar(100)
+	productos    Producto[]
+
+	@@map("proveedor")
+}
+
+model Producto {
+	id_producto     Int           @id @default(autoincrement())
+	nombre          String        @db.VarChar(150)
+	descripcion     String?       @db.VarChar(255)
+	precio          Decimal       @db.Decimal(10, 2)
+	stock_minimo    Int?          @default(5)
+	id_subcategoria Int
+	id_marca        Int
+	id_proveedor    Int
+
+	subcategoria Subcategoria  @relation(fields: [id_subcategoria], references: [id_subcategoria])
+	marca        Marca         @relation(fields: [id_marca], references: [id_marca])
+	proveedor    Proveedor     @relation(fields: [id_proveedor], references: [id_proveedor])
+	stocks       Stock[]
+	lineas       Linea_Pedido[]
+	resenas      Resena[]
+
+	@@map("producto")
+}
+
+model Cliente {
+	id_cliente    Int       @id @default(autoincrement())
+	nombre        String    @db.VarChar(100)
+	apellido      String    @db.VarChar(100)
+	email         String    @unique @db.VarChar(150)
+	telefono      String?   @db.VarChar(20)
+	direccion     String?   @db.VarChar(200)
+	ciudad        String?   @db.VarChar(100)
+	provincia     String?   @db.VarChar(100)
+	codigo_postal String?   @db.VarChar(10)
+	pedidos       Pedido[]
+	resenas       Resena[]
+
+	@@map("cliente")
+}
+
+model Sucursal {
+	id_sucursal Int     @id @default(autoincrement())
+	nombre      String  @db.VarChar(100)
+	direccion   String? @db.VarChar(200)
+	ciudad      String? @db.VarChar(100)
+	telefono    String? @db.VarChar(20)
+	stocks      Stock[]
+
+	@@map("sucursal")
+}
+
+model Stock {
+	id_stock    Int      @id @default(autoincrement())
+	cantidad    Int      @default(0)
+	id_producto Int
+	id_sucursal Int
+	producto    Producto @relation(fields: [id_producto], references: [id_producto])
+	sucursal    Sucursal @relation(fields: [id_sucursal], references: [id_sucursal])
+
+	@@map("stock")
+}
+
+model Envio {
+	id_envio      Int      @id @default(autoincrement())
+	direccion     String   @db.VarChar(200)
+	ciudad        String?  @db.VarChar(100)
+	provincia     String?  @db.VarChar(100)
+	codigo_postal String?  @db.VarChar(10)
+	fecha_envio   DateTime? @db.Date
+	estado        String?  @default("Pendiente") @db.VarChar(50)
+	pedidos       Pedido[]
+
+	@@map("envio")
+}
+
+model Pedido {
+	id_pedido  Int       @id @default(autoincrement())
+	fecha      DateTime  @db.Date
+	total      Decimal   @db.Decimal(12, 2)
+	estado     String?   @default("Pendiente") @db.VarChar(50)
+	id_cliente Int
+	id_envio   Int?
+	cliente    Cliente   @relation(fields: [id_cliente], references: [id_cliente])
+	envio      Envio?    @relation(fields: [id_envio], references: [id_envio])
+	lineas     Linea_Pedido[]
+	pagos      Pago[]
+
+	@@map("pedido")
+}
+
+model Linea_Pedido {
+	id_linea        Int      @id @default(autoincrement())
+	cantidad        Int
+	precio_unitario Decimal  @db.Decimal(10, 2)
+	id_producto     Int
+	id_pedido       Int
+	producto        Producto @relation(fields: [id_producto], references: [id_producto])
+	pedido          Pedido   @relation(fields: [id_pedido], references: [id_pedido])
+
+	@@map("linea_pedido")
+}
+
+model Pago {
+	id_pago   Int      @id @default(autoincrement())
+	metodo    String   @db.VarChar(50)
+	monto     Decimal  @db.Decimal(12, 2)
+	fecha     DateTime @db.Date
+	id_pedido Int
+	pedido    Pedido   @relation(fields: [id_pedido], references: [id_pedido])
+
+	@@map("pago")
+}
+
+model Resena {
+	id_resena   Int      @id @default(autoincrement())
+	puntuacion  Int
+	comentario  String?  @db.VarChar(500)
+	fecha       DateTime @db.Date
+	id_cliente  Int
+	id_producto Int
+	cliente     Cliente  @relation(fields: [id_cliente], references: [id_cliente])
+	producto    Producto @relation(fields: [id_producto], references: [id_producto])
+
+	@@map("resena")
+}
