@@ -201,3 +201,10 @@ MIT (c) Magali Ofelia Gafe
 
 - GitHub: [@maga-484] (https://github.com/maga-484)
 - LinkedIn: [magali-gafe] (https://www.linkedin.com/in/magal%C3%AD-gafe-713224ab/)
+
+## Live Demo
+
+[https://maga-484.github.io/ecommerce_clone/](https://maga-484.github.io/ecommerce_clone/)
+
+> The live demo shows the UI but requires running the backend locally
+> for full functionality. See setup instructions below.
